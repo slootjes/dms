@@ -1,0 +1,26 @@
+parameters:
+    elasticsearch_host: '%env(string:ELASTICSEARCH_HOST)%'
+    document_path: '%env(string:DOCUMENT_PATH)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $documentPath: '%document_path%'
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    Elasticsearch\ClientBuilder:
+        factory: ['Elasticsearch\ClientBuilder', create]
+        calls:
+            - [setHosts, [['%elasticsearch_host%']]]
+
+    Elasticsearch\Client:
+        factory: ['@Elasticsearch\ClientBuilder', build]

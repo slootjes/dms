@@ -1,0 +1,39 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h3><i class="fas fa-fw fa-search"></i> Documenten</h3>
+
+        {{ form(form) }}
+
+        {% if result is not empty %}
+            <h4>Gevonden Documenten</h4>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Onderwerp</th>
+                    <th scope="col">Afzender</th>
+                    <th scope="col">Geadresseerde</th>
+                    <th scope="col">Opties</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for hit in result.hits %}
+                    <tr>
+                        <td>{{ hit.created|date('Y-m-d') }}</td>
+                        <td>{{ hit.subject }}</td>
+                        <td>{{ hit.from }}</td>
+                        <td>{{ hit.to }}</td>
+                        <td>
+                            <a target="_blank" href="{{ path('view', {id: hit.id, r: 'now'|date('YmdHis')}) }}"><i class="fas fa-fw fa-eye"></i></a>
+                            <a target="_blank" href="{{ path('download', {id: hit.id, r: 'now'|date('YmdHis')}) }}"><i class="fas fa-fw fa-download"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
