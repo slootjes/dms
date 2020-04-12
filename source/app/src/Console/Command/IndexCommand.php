@@ -49,7 +49,7 @@ class IndexCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Indexing documents, this can take a while...')
+        $output->writeln('Indexing documents, this can take a while...');
 
         $from = null;
         if (!empty($input->getOption(self::OPTION_FROM))) {

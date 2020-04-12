@@ -266,8 +266,8 @@ class DocumentRepository
             'filepath',
             'filename',
             'created',
-            'from',
-            'to',
+            'sender',
+            'recipient',
             'subject'
         ];
     }

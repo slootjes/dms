@@ -46,14 +46,14 @@ class DocumentSearchType extends AbstractType
                 ],
                 'required' => false
             ])
-            ->add('from', TextType::class, [
+            ->add('sender', TextType::class, [
                 'label' => 'Afzender',
                 'constraints' => [
                     new Length(['min' => 1, 'max' => 255])
                 ],
                 'required' => false
             ])
-            ->add('to', ChoiceType::class, [
+            ->add('recipient', ChoiceType::class, [
                 'label' => 'Geadresseerde',
                 'choices' => $aggregations->getAggregations()['recipient']->getBucketKeys(),
                 'empty_data' => '',
