@@ -36,12 +36,12 @@ class Document
     /**
      * @var string
      */
-    private $from;
+    private $sender;
 
     /**
      * @var string
      */
-    private $to;
+    private $recipient;
 
     /**
      * @var string
@@ -62,8 +62,8 @@ class Document
             $this->id = $hit->getId();
             $this->filepath = $hit->getSourceField('filepath');
             $this->filename = $hit->getSourceField('filename');
-            $this->from = $hit->getSourceField('from');
-            $this->to = $hit->getSourceField('to');
+            $this->sender = $hit->getSourceField('sender');
+            $this->recipient = $hit->getSourceField('recipient');
             $this->subject = $hit->getSourceField('subject');
             $this->created = \DateTimeImmutable::createFromFormat('Y-m-d', $hit->getSourceField('created'));
         }
@@ -103,12 +103,12 @@ class Document
         $data = array_slice(explode(' - ', $filename), 1);
         switch (count($data)) {
             case 2:
-                $this->from = $data[0];
+                $this->sender = $data[0];
                 $this->subject = $data[1];
                 break;
             case 3:
-                $this->from = $data[0];
-                $this->to = $data[1];
+                $this->sender = $data[0];
+                $this->recipient = $data[1];
                 $this->subject = $data[2];
                 break;
             default:
@@ -159,17 +159,17 @@ class Document
     /**
      * @return string
      */
-    public function getFrom(): string
+    public function getSender(): string
     {
-        return $this->from;
+        return $this->sender;
     }
 
     /**
      * @return string
      */
-    public function getTo(): ?string
+    public function getRecipient(): ?string
     {
-        return $this->to;
+        return $this->recipient;
     }
 
     /**
@@ -202,8 +202,8 @@ class Document
             'filepath' => $this->getFilePath(),
             'filename' => $this->getFileName(),
             'created' => $this->created->format('Y-m-d'),
-            'from' => $this->from,
-            'to' => $this->to,
+            'sender' => $this->sender,
+            'recipient' => $this->recipient,
             'subject' => $this->subject,
         ];
 

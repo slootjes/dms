@@ -1,6 +1,7 @@
 parameters:
     env(ELASTICSEARCH_HOSTS): 'localhost'
     env(DOCUMENT_PATH): '/documents/'
+    env(DOCUMENT_LANGUAGE): 'dutch'
 
 services:
     _defaults:
@@ -8,6 +9,7 @@ services:
         autoconfigure: true
         bind:
             $documentPath: '%env(string:DOCUMENT_PATH)%'
+            $documentLanguage: '%env(string:DOCUMENT_LANGUAGE)%'
 
     App\:
         resource: '../src/*'

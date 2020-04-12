@@ -24,8 +24,8 @@
                     <tr>
                         <td>{{ hit.created|date('Y-m-d') }}</td>
                         <td>{{ hit.subject }}</td>
-                        <td>{{ hit.from }}</td>
-                        <td>{{ hit.to }}</td>
+                        <td>{{ hit.sender }}</td>
+                        <td>{{ hit.recipient }}</td>
                         <td>
                             <a target="_blank" href="{{ path('view', {id: hit.id, r: 'now'|date('YmdHis')}) }}"><i class="fas fa-fw fa-eye"></i></a>
                             <a target="_blank" href="{{ path('download', {id: hit.id, r: 'now'|date('YmdHis')}) }}"><i class="fas fa-fw fa-download"></i></a>

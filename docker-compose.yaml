@@ -1,0 +1,44 @@
+version: '3.7'
+
+networks:
+  web:
+    external: true
+
+services:
+  dms:
+    build: ./dms
+    container_name: dms
+    networks:
+      - web
+    environment:
+      APP_ENV: "prod"
+      APP_SECRET: "{put_something_random_here}"
+      ELASTICSEARCH_HOSTS: "elasticsearch"
+    volumes:
+      - {path_to_your_documents}:/documents
+    ports:
+      - 1337:80
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - {path_to_your_elasticsearch_data}:/usr/share/elasticsearch/data
+      - {path_to_your_elasticsearch_plugins}:/usr/share/elasticsearch/plugins
+    ports:
+      - 9200:9200
+    networks:
+      - web
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.2
+    container_name: kibana
+    environment:
+      SERVER_NAME: localhost
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - web

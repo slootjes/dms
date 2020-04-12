@@ -18,11 +18,18 @@ class DocumentRepository
     private $client;
 
     /**
-     * @param Client $client
+     * @var string
      */
-    public function __construct(Client $client)
+    private $documentLanguage;
+
+    /**
+     * @param Client $client
+     * @param string $documentLanguage
+     */
+    public function __construct(Client $client, string $documentLanguage)
     {
         $this->client = $client;
+        $this->documentLanguage = $documentLanguage;
     }
 
     /**
@@ -49,17 +56,17 @@ class DocumentRepository
                 ]
             ];
         }
-        if (!empty($data['from'])) {
+        if (!empty($data['sender'])) {
             $query['bool']['must'][] = [
                 'match' => [
-                    'from' => $data['from']
+                    'sender' => $data['sender']
                 ]
             ];
         }
-        if (!empty($data['to'])) {
+        if (!empty($data['recipient'])) {
             $query['bool']['must'][] = [
                 'term' => [
-                    'to' => $data['to']
+                    'recipient' => $data['recipient']
                 ]
             ];
         }
@@ -169,17 +176,17 @@ class DocumentRepository
                 'settings' => [
                     'analysis' => [
                         'filter' => [
-                            'dutch_stop' => [
+                            'dms_stopwords' => [
                                 'type' => 'stop',
-                                'stopwords' => '_dutch_'
+                                'stopwords' => sprintf('_%s_', $this->documentLanguage)
                             ]
                         ],
                         'analyser' => [
-                            'dutch' => [
+                            'dms' => [
                                 'tokenizer' => 'standard',
                                 'filter' => [
                                     'lowercase',
-                                    'dutch_stop'
+                                    'dms_stopwords'
                                 ]
                             ]
                         ]
@@ -193,9 +200,9 @@ class DocumentRepository
                         'filename' => [
                             'type' => 'keyword'
                         ],
-                        'from' => [
+                        'sender' => [
                             'type' => 'text',
-                            'analyzer' => 'dutch',
+                            'analyzer' => 'dms',
                             'fields' => [
                                 'keyword' => [
                                     'type' => 'keyword'
@@ -204,14 +211,14 @@ class DocumentRepository
                         ],
                         'subject' => [
                             'type' => 'text',
-                            'analyzer' => 'dutch',
+                            'analyzer' => 'dms',
                             'fields' => [
                                 'keyword' => [
                                     'type' => 'keyword'
                                 ]
                             ]
                         ],
-                        'to' => [
+                        'recipient' => [
                             'type' => 'keyword'
                         ],
                         'created' => [
@@ -240,8 +247,8 @@ class DocumentRepository
                     'created_max' => [
                         'max' => ['field' => 'created', 'format' => 'yyyy-MM-dd']
                     ],
-                    'to' => [
-                        'terms' => ['field' => 'to']
+                    'recipient' => [
+                        'terms' => ['field' => 'recipient']
                     ]
                 ]
             ]
