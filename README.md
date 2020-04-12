@@ -50,7 +50,7 @@ Recommended installation is by using the provider Dockerfile.
 
 ### Docker Compose
 
-See example setup combined with Elasticsearch and Kibana in docker-compose.yaml.
+See example setup combined with Elasticsearch and Kibana (optional) in docker-compose.yaml.
 
 ### Commands
 

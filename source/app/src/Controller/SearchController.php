@@ -68,6 +68,7 @@ class SearchController extends AbstractController
      *
      * @param string $id
      * @return BinaryFileResponse
+     * @throws \Exception
      */
     public function view(string $id): BinaryFileResponse
     {
@@ -79,6 +80,7 @@ class SearchController extends AbstractController
      *
      * @param string $id
      * @return BinaryFileResponse
+     * @throws \Exception
      */
     public function download(string $id): BinaryFileResponse
     {
@@ -89,11 +91,16 @@ class SearchController extends AbstractController
      * @param string $id
      * @param string $disposition
      * @return BinaryFileResponse
+     * @throws \Exception
      */
     private function getFile(string $id, $disposition = ResponseHeaderBag::DISPOSITION_ATTACHMENT): BinaryFileResponse
     {
         $document = $this->repository->findById($id);
+        $filePath = $this->path . $document->getFilepathDownload();
+        if (!file_exists($filePath)) {
+            throw new \Exception(sprintf('Could not load file at path: %s', $filePath));
+        }
 
-        return $this->file($this->path . $document->getFilepathDownload(), $document->getFileName(), $disposition);
+        return $this->file($filePath, $document->getFileName(), $disposition);
     }
 }
