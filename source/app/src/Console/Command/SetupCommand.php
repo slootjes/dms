@@ -32,9 +32,11 @@ class SetupCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('Setting up, can take a few minutes...');
+
         $this->repository->setup();
 
-        $output->writeln('Setup complete, you can now index your documents');
+        $output->writeln('Done! You can now proceed to index your documents.');
 
         return 0;
     }
