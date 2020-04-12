@@ -1,5 +1,7 @@
 FROM php:7.4-apache
 
+RUN a2enmod rewrite
+
 COPY ./source/app/ /var/www/html/
 RUN rm /var/www/html/.env.local
 RUN touch /var/www/html/.env.local
