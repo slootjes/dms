@@ -6,23 +6,33 @@
 
 Put all your pdf documents in a directory structure like this:
 
-/{year}/{month}/{date} - {sender} - {recipient} - {subject}.pdf
+`/{yyyy}/{MM}/{yyyy-MM-dd} - {sender} - {recipient} - {subject}.pdf`
 
 or if there is no specific recipient:
 
-/{year}/{month}/{date} - {sender} - {subject}.pdf
+`/{yyyy}/{MM}/{yyyy-MM-dd} - {sender} - {subject}.pdf`
 
 Make sure your pdf documents contain actual text (using ocr if needed) to improve reliability.
 
+The structure as is works really well on it's own to quickly find documents.
+Most operating systems are capable of finding files using their built-in search engine. 
+
 ### Application
 
-The app can index your documents in Elasticsearch and provides an easy to use tool to search, view and download your documents.
+To make searching easier and allow searching specific documents the app can index your documents 
+in Elasticsearch and provides an easy to use tool to search, view and download these documents.
 
 ## Installation
 
 ### Docker
 
 Recommended installation is by using the provider Dockerfile. 
+
+#### Build
+`docker build -t dms .`
+
+#### Run
+`docker run -d -p 1337:80 -e APP_ENV="prod" -e APP_SECRET="{something_random}" -e ELASTICSEARCH_HOSTS="{elasticsearch_host}" -v {path_to_your_documents}:/documents --name dms dms`
 
 ### Docker Compose
 
