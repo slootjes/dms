@@ -55,7 +55,7 @@ class DocumentSearchType extends AbstractType
             ])
             ->add('to', ChoiceType::class, [
                 'label' => 'Geadresseerde',
-                'choices' => $aggregations->getAggregations()['to']->getBucketKeys(),
+                'choices' => $aggregations->getAggregations()['recipient']->getBucketKeys(),
                 'empty_data' => '',
                 'required' => false
             ])

@@ -1,4 +1,4 @@
-# Document Management System (work in progress)
+# Document Management System
 
 ## Concept
 
@@ -6,21 +6,35 @@
 
 Put all your pdf documents in a directory structure like this:
 
+#### With recipient
+
 `/{yyyy}/{MM}/{yyyy-MM-dd} - {sender} - {recipient} - {subject}.pdf`
 
-or if there is no specific recipient:
+Example:
+`2020/04/2020/2020-04-12 - Sender - Receipient - Subject.pdf`
+
+#### With specific recipient
 
 `/{yyyy}/{MM}/{yyyy-MM-dd} - {sender} - {subject}.pdf`
 
-Make sure your pdf documents contain actual text (using ocr if needed) to improve reliability.
+Example:
+`2020/04/2020/2020-04-12 - Sender - Subject.pdf`
+
+### Recommendation
+For best results make sure your documents contain actual text (using ocr if needed) to improve reliability.
+
+### Application
 
 The structure as is works really well on it's own to quickly find documents.
 Most operating systems are capable of finding files using their built-in search engine. 
 
-### Application
-
 To make searching easier and allow searching specific documents the app can index your documents 
 in Elasticsearch and provides an easy to use tool to search, view and download these documents.
+
+## Requirements
+
+- PHP ^7.4
+- Elasticsearch ^7.6 with Ingest Attachment Processor Plugin
 
 ## Installation
 

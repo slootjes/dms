@@ -125,7 +125,7 @@ class DocumentRepository
      * @param Document $document
      * @param bool $useData
      */
-    public function add(Document $document, $useData = true)
+    public function index(Document $document, $useData = true)
     {
         $params = [
             'index' => self::INDEX,
@@ -181,11 +181,13 @@ class DocumentRepository
                                 'stopwords' => sprintf('_%s_', $this->documentLanguage)
                             ]
                         ],
-                        'analyser' => [
+                        'analyzer' => [
                             'dms' => [
+                                'type' => 'custom',
                                 'tokenizer' => 'standard',
                                 'filter' => [
                                     'lowercase',
+                                    'trim',
                                     'dms_stopwords'
                                 ]
                             ]

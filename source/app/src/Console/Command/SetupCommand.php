@@ -34,6 +34,8 @@ class SetupCommand extends Command
     {
         $this->repository->setup();
 
+        $output->writeln('Setup complete, you can now index your documents');
+
         return 0;
     }
 }

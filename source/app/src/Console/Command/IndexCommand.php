@@ -66,7 +66,7 @@ class IndexCommand extends Command
                         continue;
                     }
                     $output->writeln( $file->getRelativePathname());
-                    $this->repository->add($document, $useBody);
+                    $this->repository->index($document, $useBody);
                 } catch (\Exception $e) {
                     $useBody = false;
                     $output->writeln('Error indexing: :' . $e->getMessage());
