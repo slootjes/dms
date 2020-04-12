@@ -15,7 +15,7 @@ services:
       APP_SECRET: "{put_something_random_here}"
       ELASTICSEARCH_HOSTS: "elasticsearch"
     volumes:
-      - {path_to_your_documents}:/documents
+      - {path_to_your_documents}:/documents:ro
     ports:
       - 1337:80
   elasticsearch:
