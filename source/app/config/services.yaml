@@ -1,13 +1,13 @@
 parameters:
-    elasticsearch_host: '%env(string:ELASTICSEARCH_HOST)%'
-    document_path: '%env(string:DOCUMENT_PATH)%'
+    env(ELASTICSEARCH_HOSTS): 'localhost'
+    env(DOCUMENT_PATH): '/documents/'
 
 services:
     _defaults:
         autowire: true
         autoconfigure: true
         bind:
-            $documentPath: '%document_path%'
+            $documentPath: '%env(string:DOCUMENT_PATH)%'
 
     App\:
         resource: '../src/*'
@@ -20,7 +20,7 @@ services:
     Elasticsearch\ClientBuilder:
         factory: ['Elasticsearch\ClientBuilder', create]
         calls:
-            - [setHosts, [['%elasticsearch_host%']]]
+            - [setHosts, [['%env(string:ELASTICSEARCH_HOSTS)%']]]
 
     Elasticsearch\Client:
         factory: ['@Elasticsearch\ClientBuilder', build]
