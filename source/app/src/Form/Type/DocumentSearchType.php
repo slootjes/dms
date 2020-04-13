@@ -64,14 +64,16 @@ class DocumentSearchType extends AbstractType
                 'input'  => 'datetime_immutable',
                 'years' => range($yearMin, $yearMax),
                 'label' => 'Van',
-                'required' => false
+                'required' => false,
+                'data' => \DateTimeImmutable::createFromMutable(new \DateTime('-1 years'))
             ])
             ->add('created_max', DateType::class, [
                 'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
                 'years' => range($yearMin, $yearMax),
                 'label' => 'Tot',
-                'required' => false
+                'required' => false,
+                'data' => new \DateTimeImmutable()
             ])
             ->add('sort', ChoiceType::class, [
                 'label' => 'Sortering',
