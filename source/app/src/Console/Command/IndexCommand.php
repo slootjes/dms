@@ -67,7 +67,7 @@ class IndexCommand extends Command
                     if (!empty($from) && $document->getCreated() < $from) {
                         continue;
                     }
-                    $output->writeln( $file->getRelativePathname());
+                    $output->writeln($file->getRelativePathname());
                     $this->repository->index($document, $useBody);
                 } catch (\Exception $e) {
                     $useBody = false;
