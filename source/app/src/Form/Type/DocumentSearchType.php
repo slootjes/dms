@@ -60,14 +60,14 @@ class DocumentSearchType extends AbstractType
                 'required' => false
             ])
             ->add('created_min', DateType::class, [
-                'widget' => 'choice',
+                'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
                 'years' => range($yearMin, $yearMax),
                 'label' => 'Van',
                 'required' => false
             ])
             ->add('created_max', DateType::class, [
-                'widget' => 'choice',
+                'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
                 'years' => range($yearMin, $yearMax),
                 'label' => 'Tot',
