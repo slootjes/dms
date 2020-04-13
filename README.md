@@ -60,7 +60,19 @@ Setup index: `docker exec dms php /var/www/html/bin/console document:setup`
 
 Index your documents: `docker exec dms php /var/www/html/bin/console document:index`
 
-### Disclaimer
+## Troubleshooting
+
+### Installing Elasticsearch Ingest Attachment Processor Plugin
+
+If you have issues installing the plugin (eg: because of java permission issues), the easiest thing 
+to do is to manually install the plugin after spinning up the Elasticsearch container:
+
+`docker exec -i -t elasticsearch /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment`
+
+Make sure you have mapped the `/usr/share/elasticsearch/plugins` folder from the container to a local volume.
+After this is done you must restart the container and you should be good to go.
+
+## Disclaimer
 
 You can use this software as-is without any warranty.
 You are responsible for securing your devices and software yourself.
