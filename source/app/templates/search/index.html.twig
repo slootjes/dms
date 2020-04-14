@@ -36,6 +36,17 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col col-1">
+                {{ form_row(form.submit) }}
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <a class="btn btn-link" href="{{ path('home') }}" role="button">Reset</a>
+                </div>
+            </div>
+        </div>
+
         {{ form_end(form) }}
 
         <hr />

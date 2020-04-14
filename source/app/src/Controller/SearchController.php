@@ -42,7 +42,7 @@ class SearchController extends AbstractController
     }
 
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function index(Request $request)
     {

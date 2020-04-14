@@ -85,6 +85,8 @@ class DocumentSearchType extends AbstractType
                 'required' => false,
                 'empty_data' => '',
             ])
-            ->add('zoeken', SubmitType::class);
+            ->add('submit', SubmitType::class, [
+                'label' => 'Zoeken'
+            ]);
     }
 }
