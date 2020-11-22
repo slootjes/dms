@@ -17,4 +17,5 @@ RUN apt-get update && apt-get install git unzip -y
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN cd /var/www/html
+RUN composer self-update --1
 RUN composer install --no-dev --no-scripts
