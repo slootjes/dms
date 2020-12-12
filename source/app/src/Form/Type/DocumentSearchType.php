@@ -65,7 +65,7 @@ class DocumentSearchType extends AbstractType
                 'years' => range($yearMin, $yearMax),
                 'label' => 'Van',
                 'required' => false,
-                'data' => \DateTimeImmutable::createFromMutable(new \DateTime('-1 years'))
+                'data' => \DateTimeImmutable::createFromMutable(new \DateTime('-3 years'))
             ])
             ->add('created_max', DateType::class, [
                 'widget' => 'single_text',
