@@ -107,8 +107,8 @@ class Document
                 $this->subject = $data[1];
                 break;
             case 3:
-                // as recipient, only support letters and spaces
-                if (preg_match('/^[a-zA-Z ]+$/', $data[1])) {
+                // as recipient, only support letters
+                if (preg_match('/^[a-zA-Z]+$/', $data[1])) {
                     $this->sender = $data[0];
                     $this->recipient = $data[1];
                     $this->subject = $data[2];
