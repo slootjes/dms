@@ -107,9 +107,16 @@ class Document
                 $this->subject = $data[1];
                 break;
             case 3:
-                $this->sender = $data[0];
-                $this->recipient = $data[1];
-                $this->subject = $data[2];
+                // as recipient, only support letters
+                if (preg_match('/[a-zA-Z ]+/', $data[1])) {
+                    $this->sender = $data[0];
+                    $this->recipient = $data[1];
+                    $this->subject = $data[2];
+                }
+                else {
+                    $this->sender = $data[0];
+                    $this->subject = $data[1].' '.$data[2];
+                }
                 break;
             default:
                 throw new InvalidDocumentException($this->file, ' does not contain valid data '.count($data));
